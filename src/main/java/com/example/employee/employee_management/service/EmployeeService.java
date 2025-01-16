@@ -2,7 +2,6 @@ package com.example.employee.employee_management.service;
 
 import com.example.employee.employee_management.model.Employee;
 import com.example.employee.employee_management.repository.EmployeeRepository;
-import jakarta.validation.constraints.Null;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,8 +30,12 @@ public class EmployeeService {
                     employee.setDepartment(updatedEmployee.getDepartment());
                     employee.setPosition(updatedEmployee.getPosition());
                     employee.setSalary(updatedEmployee.getSalary());
-                    return employee;
+                    return employeeRepository.save(employee);
                 }).orElse(null);
+    }
+
+    public void deleteEmployeeById(Long id){
+        employeeRepository.deleteById(id);
     }
 
 }
