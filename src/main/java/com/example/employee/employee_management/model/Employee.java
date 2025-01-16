@@ -1,6 +1,7 @@
 package com.example.employee.employee_management.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "employees", schema = "employee_management")
@@ -10,6 +11,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne
@@ -20,6 +22,8 @@ public class Employee {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
+    @Column(nullable = false)
+    @Min(value = 0, message = "Salary must be positive")
     private Double salary;
 
     public Employee() {
@@ -28,6 +32,13 @@ public class Employee {
     public Employee(String name, Double salary) {
         this.name = name;
         this.salary = salary;
+    }
+
+    public Employee(String name, Double salary, Position position, Department department) {
+        this.name = name;
+        this.salary = salary;
+        this.position = position;
+        this.department = department;
     }
 
     public Long getId() {
@@ -75,8 +86,6 @@ public class Employee {
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", position=" + position +
-                ", department=" + department +
                 ", salary=" + salary +
                 '}';
     }

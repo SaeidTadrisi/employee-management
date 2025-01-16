@@ -12,6 +12,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "department",
@@ -53,9 +54,8 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", employees=" + employees +
+                "name='" + name + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

@@ -1,3 +1,4 @@
+DROP SCHEMA IF EXISTS employee_management;
 CREATE SCHEMA employee_management;
 
 CREATE TABLE employee_management.departments (

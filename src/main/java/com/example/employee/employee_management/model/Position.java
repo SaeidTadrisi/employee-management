@@ -12,8 +12,10 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false, length = 500)
     private String responsibilities;
 
     @OneToMany(mappedBy = "position",
@@ -23,9 +25,9 @@ public class Position {
     public Position() {
     }
 
-    public Position(String responsibilities, String title) {
-        this.responsibilities = responsibilities;
+    public Position(String title, String responsibilities) {
         this.title = title;
+        this.responsibilities = responsibilities;
     }
 
     public Long getId() {
@@ -60,13 +62,13 @@ public class Position {
         this.title = title;
     }
 
+
     @Override
     public String toString() {
         return "Position{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", responsibilities='" + responsibilities + '\'' +
-                ", employees=" + employees +
                 '}';
     }
 }
