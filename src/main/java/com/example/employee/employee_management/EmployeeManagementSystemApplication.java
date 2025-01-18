@@ -55,12 +55,16 @@ public class EmployeeManagementSystemApplication {
 //				System.out.println(employees);
 //			});
 
-			departmentService.findDepartmentByIdWithEmployees(1L).ifPresent(department -> {
-				List<Employee> employees = department.getEmployees();
-				System.out.println(department);
-				System.out.println("==========>");
-				System.out.println(employees);
-			});
+//			departmentService.findDepartmentByIdWithEmployees(1L).ifPresent(department -> {
+//				List<Employee> employees = department.getEmployees();
+//				System.out.println(department);
+//				System.out.println("==========>");
+//				System.out.println(employees);
+//			});
+
+			System.out.println(employeeService.findEmployeeByIdWithDepartmentAndPosition(3L));
+
+
 		};
 }
 

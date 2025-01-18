@@ -74,4 +74,8 @@ public class EmployeeService {
 
         return employeeRepository.save(employee);
     }
+
+    public Optional<Employee> findEmployeeByIdWithDepartmentAndPosition(Long id){
+        return employeeRepository.findEmployeeByIdWithDepartmentAndPosition(id);
+    }
 }

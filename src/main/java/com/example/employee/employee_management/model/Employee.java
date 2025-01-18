@@ -2,6 +2,8 @@ package com.example.employee.employee_management.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -12,21 +14,20 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 8)
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    @Column(nullable = false)
+    private Double salary;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @Column(nullable = false)
-    @Min(value = 0, message = "Salary must be positive")
-    private Double salary;
 
     public Employee() {
     }
