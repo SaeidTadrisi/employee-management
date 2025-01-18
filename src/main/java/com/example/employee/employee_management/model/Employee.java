@@ -2,6 +2,7 @@ package com.example.employee.employee_management.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "employees", schema = "employee_management")
@@ -11,15 +12,16 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 8)
     @Column(nullable = false)
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "position_id", nullable = false)
+    @JoinColumn(name = "position_id")
     private Position position;
 
     @ManyToOne
-    @JoinColumn(name = "department_id", nullable = false)
+    @JoinColumn(name = "department_id")
     private Department department;
 
     @Column(nullable = false)

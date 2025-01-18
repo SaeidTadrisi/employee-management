@@ -2,9 +2,13 @@ package com.example.employee.employee_management.service;
 
 import com.example.employee.employee_management.model.Department;
 import com.example.employee.employee_management.repository.DepartmentRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
+@Transactional
 public class DepartmentService {
 
     DepartmentRepository departmentRepository;
@@ -26,11 +30,14 @@ public class DepartmentService {
                 .map(department -> {
                     department.setName(updatedDepartment.getName());
                     return departmentRepository.save(department);
-                })
-                .orElse(null);
+                }).orElseThrow(() -> new RuntimeException("Department not found with id: " + id));
     }
 
     public void deleteDepartmentById(Long id){
         departmentRepository.deleteById(id);
+    }
+
+    public Optional<Department> findDepartmentByIdWithEmployees(Long id){
+        return departmentRepository.findDepartmentByIdWithEmployees(id);
     }
 }

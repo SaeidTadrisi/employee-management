@@ -6,11 +6,13 @@ import com.example.employee.employee_management.model.Position;
 import com.example.employee.employee_management.repository.DepartmentRepository;
 import com.example.employee.employee_management.repository.EmployeeRepository;
 import com.example.employee.employee_management.repository.PositionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class EmployeeService {
 
     EmployeeRepository employeeRepository;
@@ -41,7 +43,7 @@ public class EmployeeService {
                     employee.setPosition(updatedEmployee.getPosition());
                     employee.setSalary(updatedEmployee.getSalary());
                     return employeeRepository.save(employee);
-                }).orElse(null);
+                }).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
     }
 
     public void deleteEmployeeById(Long id){

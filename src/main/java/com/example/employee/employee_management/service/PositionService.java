@@ -2,9 +2,13 @@ package com.example.employee.employee_management.service;
 
 import com.example.employee.employee_management.model.Position;
 import com.example.employee.employee_management.repository.PositionRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
+@Transactional
 public class PositionService {
 
     PositionRepository positionRepository;
@@ -27,10 +31,15 @@ public class PositionService {
                     position.setTitle(updatedPosition.getTitle());
                     position.setResponsibilities(updatedPosition.getResponsibilities());
                     return positionRepository.save(position);
-                }).orElse(null);
+                }).orElseThrow(() -> new RuntimeException("Position not found with id: " + id));
     }
 
     public void deletePositionById(Long id){
         positionRepository.deleteById(id);
+    }
+
+
+    public Optional<Position> findPositionByIdWithEmployees(Long id){
+        return positionRepository.findPositionByIdWithEmployees(id);
     }
 }
