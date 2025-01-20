@@ -1,18 +1,9 @@
 package com.example.employee.employee_management;
 
-import com.example.employee.employee_management.model.Department;
-import com.example.employee.employee_management.model.Employee;
-import com.example.employee.employee_management.model.Position;
-import com.example.employee.employee_management.service.DepartmentService;
-import com.example.employee.employee_management.service.EmployeeService;
-import com.example.employee.employee_management.service.PositionService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
 public class EmployeeManagementSystemApplication {
@@ -22,9 +13,7 @@ public class EmployeeManagementSystemApplication {
 	}
 
 	@Bean
-	public CommandLineRunner cm (EmployeeService employeeService
-			, DepartmentService departmentService
-			, PositionService positionService){
+	public CommandLineRunner cm (){
 
 		return runner -> {
 
@@ -62,29 +51,29 @@ public class EmployeeManagementSystemApplication {
 //				System.out.println(employees);
 //			});
 
-			System.out.println(employeeService.findEmployeeByIdWithDepartmentAndPosition(3L));
+//			System.out.println(employeeService.findEmployeeByIdWithDepartmentAndPosition(3L));
 
 
 		};
 }
 
-	private Position createPosition(PositionService positionService) {
-		return positionService.createPosition(new Position("Software Developer"
-		, """
-				Implement CRUD operations for employee records.
-				Design and develop the backend using Java and frameworks like Spring Boot.
-				Connect the application to the database using JPA/Hibernate.
-				Write unit and integration tests for code reliability.
-				"""));
-	}
-
-
-	private static Employee createEmployee(EmployeeService employeeService) {
-		return employeeService.createEmployee(new Employee("Mate", 450000.0));
-	}
-
-	private Department createDepartment(DepartmentService departmentService) {
-		return departmentService.createDepartment(new Department("HR"));
-	}
+//	private Position createPosition(PositionService positionService) {
+//		return positionService.createPosition(new Position("Software Developer"
+//		, """
+//				Implement CRUD operations for employee records.
+//				Design and develop the backend using Java and frameworks like Spring Boot.
+//				Connect the application to the database using JPA/Hibernate.
+//				Write unit and integration tests for code reliability.
+//				"""));
+//	}
+//
+//
+//	private static Employee createEmployee(EmployeeService employeeService) {
+//		return employeeService.createEmployee(new Employee("Mate", 450000.0));
+//	}
+//
+//	private Department createDepartment(DepartmentService departmentService) {
+//		return departmentService.createDepartment(new Department("HR"));
+//	}
 
 }

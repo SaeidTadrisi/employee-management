@@ -14,6 +14,9 @@ public class Employee {
     private String name;
 
     @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
     private Double salary;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -28,16 +31,18 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, Double salary) {
+    public Employee(String name, Double salary, String email) {
         this.name = name;
         this.salary = salary;
+        this.email = email;
     }
 
-    public Employee(String name, Double salary, Position position, Department department) {
+    public Employee(String name, Double salary, String email, Position position, Department department) {
         this.name = name;
         this.salary = salary;
         this.position = position;
         this.department = department;
+        this.email = email;
     }
 
     public Long getId() {
@@ -54,6 +59,14 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Position getPosition() {
@@ -85,6 +98,7 @@ public class Employee {
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", salary=" + salary +
                 '}';
     }

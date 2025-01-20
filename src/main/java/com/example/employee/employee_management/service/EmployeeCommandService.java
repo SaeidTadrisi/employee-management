@@ -1,5 +1,7 @@
 package com.example.employee.employee_management.service;
 
+import com.example.employee.employee_management.exception.DuplicateEntityException;
+import com.example.employee.employee_management.exception.EntityNotFoundException;
 import com.example.employee.employee_management.model.Department;
 import com.example.employee.employee_management.model.Employee;
 import com.example.employee.employee_management.model.Position;
@@ -9,17 +11,15 @@ import com.example.employee.employee_management.repository.PositionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @Transactional
-public class EmployeeService {
+public class EmployeeCommandService {
 
     EmployeeRepository employeeRepository;
     DepartmentRepository departmentRepository;
     PositionRepository positionRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository
+    public EmployeeCommandService(EmployeeRepository employeeRepository
             , DepartmentRepository departmentRepository
             , PositionRepository positionRepository) {
         this.employeeRepository = employeeRepository;
@@ -27,16 +27,13 @@ public class EmployeeService {
         this.positionRepository = positionRepository;
     }
 
-    @Transactional
     public Employee createEmployee(Employee employee){
+        if (employeeRepository.existsByEmail(employee.getEmail())){
+            throw new DuplicateEntityException("Employee with Email '" + employee.getEmail() + "' already exists");
+        }
         return employeeRepository.save(employee);
     }
 
-    public Optional<Employee> findEmployeeById(Long id){
-        return employeeRepository.findById(id);
-    }
-
-    @Transactional
     public Employee updateEmployee(Long id, Employee updatedEmployee){
         return employeeRepository.findById(id)
                 .map(employee -> {
@@ -45,43 +42,39 @@ public class EmployeeService {
                     employee.setPosition(updatedEmployee.getPosition());
                     employee.setSalary(updatedEmployee.getSalary());
                     return employeeRepository.save(employee);
-                }).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+                }).orElseThrow(() -> new EntityNotFoundException("Employee", id));
     }
 
-    @Transactional
-    public void deleteEmployeeById(Long id){
-        employeeRepository.deleteById(id);
-    }
-
-    @Transactional
     public Employee assignDepartment(Long employeeId, Long departmentId){
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + employeeId));
+                .orElseThrow(() -> new EntityNotFoundException("Employee", employeeId));
 
 
         Department department = departmentRepository.findById(departmentId)
-                .orElseThrow(() -> new RuntimeException("Department not found with id: " + departmentId));
+                .orElseThrow(() -> new EntityNotFoundException("Department", departmentId));
 
         employee.setDepartment(department);
 
         return employeeRepository.save(employee);
     }
 
-    @Transactional
     public Employee assignPosition(Long employeeId, Long positionId){
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + employeeId));
+                .orElseThrow(() -> new EntityNotFoundException("Employee", employeeId));
 
         Position position = positionRepository.findById(positionId)
-                .orElseThrow(() -> new RuntimeException("Position not found with id: " + positionId));
+                .orElseThrow(() -> new EntityNotFoundException("Position", positionId));
 
         employee.setPosition(position);
 
         return employeeRepository.save(employee);
     }
 
-    @Transactional
-    public Optional<Employee> findEmployeeByIdWithDepartmentAndPosition(Long id){
-        return employeeRepository.findEmployeeByIdWithDepartmentAndPosition(id);
+    public void deleteEmployeeById(Long id){
+        if (!employeeRepository.existsById(id)){
+            throw new EntityNotFoundException("Employee", id);
+        }
+        employeeRepository.deleteById(id);
     }
+
 }

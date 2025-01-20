@@ -1,5 +1,6 @@
 package com.example.employee.employee_management.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,6 +13,10 @@ public class EmployeeDTO {
     @NotNull(message = "Employee Name is required")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
+
+    @NotNull(message = "Email is required")
+    @Email(message = "Invalid email format")
+    private String email;
 
     @NotNull(message = "Salary is required")
     @Min(value = 0, message = "Salary must be a positive value")
@@ -44,6 +49,14 @@ public class EmployeeDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Double getSalary() {

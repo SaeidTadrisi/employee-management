@@ -16,4 +16,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
             "JOIN FETCH e.position " +
             "WHERE e.id = :id")
     Optional<Employee> findEmployeeByIdWithDepartmentAndPosition(@Param("id") Long id);
+
+    boolean existsByEmail(String name);
 }

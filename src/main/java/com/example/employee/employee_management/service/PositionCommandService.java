@@ -1,48 +1,44 @@
 package com.example.employee.employee_management.service;
 
+
+import com.example.employee.employee_management.exception.DuplicateEntityException;
+import com.example.employee.employee_management.exception.EntityNotFoundException;
 import com.example.employee.employee_management.model.Position;
 import com.example.employee.employee_management.repository.PositionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @Transactional
-public class PositionService {
+public class PositionCommandService {
 
     PositionRepository positionRepository;
 
-    public PositionService(PositionRepository positionRepository) {
+    public PositionCommandService(PositionRepository positionRepository) {
         this.positionRepository = positionRepository;
     }
 
-    public Optional<Position> findPositionById(Long id){
-        return positionRepository.findById(id);
-    }
-
-    @Transactional
     public Position createPosition(Position position){
+        if (positionRepository.existsByName(position.getTitle())){
+            throw new DuplicateEntityException("Position with name '" + position.getTitle() + "' already exists");
+        }
         return positionRepository.save(position);
     }
 
-    @Transactional
     public Position updatePosition(Long id, Position updatedPosition){
         return positionRepository.findById(id)
                 .map(position -> {
                     position.setTitle(updatedPosition.getTitle());
                     position.setResponsibilities(updatedPosition.getResponsibilities());
                     return positionRepository.save(position);
-                }).orElseThrow(() -> new RuntimeException("Position not found with id: " + id));
+                }).orElseThrow(() -> new EntityNotFoundException("Position", id));
     }
 
-    @Transactional
     public void deletePositionById(Long id){
-        positionRepository.deleteById(id);
+        if (!positionRepository.existsById(id)){
+        throw new EntityNotFoundException("Position", id);
     }
-
-    @Transactional
-    public Optional<Position> findPositionByIdWithEmployees(Long id){
-        return positionRepository.findPositionByIdWithEmployees(id);
+        positionRepository.deleteById(id);
     }
 }
