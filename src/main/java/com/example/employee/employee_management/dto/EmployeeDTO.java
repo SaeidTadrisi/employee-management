@@ -1,11 +1,9 @@
 package com.example.employee.employee_management.dto;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.security.PrivateKey;
 
 public class EmployeeDTO {
 
@@ -24,6 +22,10 @@ public class EmployeeDTO {
 
     @NotNull(message = "Position ID is required")
     private Long DepartmentId;
+
+    private String positionTitle;
+
+    private String departmentName;
 
     public EmployeeDTO() {
     }
@@ -66,5 +68,21 @@ public class EmployeeDTO {
 
     public void setDepartmentId(Long departmentId) {
         DepartmentId = departmentId;
+    }
+
+    public String getPositionTitle() {
+        return positionTitle;
+    }
+
+    public void setPositionTitle(String positionTitle) {
+        this.positionTitle = positionTitle;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }

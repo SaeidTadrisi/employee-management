@@ -17,14 +17,16 @@ public class PositionService {
         this.positionRepository = positionRepository;
     }
 
-    public Position createPosition(Position position){
-        return positionRepository.save(position);
-    }
-
     public Optional<Position> findPositionById(Long id){
         return positionRepository.findById(id);
     }
 
+    @Transactional
+    public Position createPosition(Position position){
+        return positionRepository.save(position);
+    }
+
+    @Transactional
     public Position updatePosition(Long id, Position updatedPosition){
         return positionRepository.findById(id)
                 .map(position -> {
@@ -34,11 +36,12 @@ public class PositionService {
                 }).orElseThrow(() -> new RuntimeException("Position not found with id: " + id));
     }
 
+    @Transactional
     public void deletePositionById(Long id){
         positionRepository.deleteById(id);
     }
 
-
+    @Transactional
     public Optional<Position> findPositionByIdWithEmployees(Long id){
         return positionRepository.findPositionByIdWithEmployees(id);
     }

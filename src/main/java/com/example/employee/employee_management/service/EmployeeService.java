@@ -27,6 +27,7 @@ public class EmployeeService {
         this.positionRepository = positionRepository;
     }
 
+    @Transactional
     public Employee createEmployee(Employee employee){
         return employeeRepository.save(employee);
     }
@@ -35,6 +36,7 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
+    @Transactional
     public Employee updateEmployee(Long id, Employee updatedEmployee){
         return employeeRepository.findById(id)
                 .map(employee -> {
@@ -46,10 +48,12 @@ public class EmployeeService {
                 }).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
     }
 
+    @Transactional
     public void deleteEmployeeById(Long id){
         employeeRepository.deleteById(id);
     }
 
+    @Transactional
     public Employee assignDepartment(Long employeeId, Long departmentId){
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + employeeId));
@@ -63,6 +67,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    @Transactional
     public Employee assignPosition(Long employeeId, Long positionId){
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + employeeId));
@@ -75,6 +80,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    @Transactional
     public Optional<Employee> findEmployeeByIdWithDepartmentAndPosition(Long id){
         return employeeRepository.findEmployeeByIdWithDepartmentAndPosition(id);
     }
