@@ -6,11 +6,13 @@ import com.example.employee.employee_management.model.Employee;
 import com.example.employee.employee_management.model.Position;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class EmployeeMapper {
 
     public EmployeeDTO toDTO(Employee employee){
-
         if (employee == null){
             return null;
         }
@@ -26,7 +28,15 @@ public class EmployeeMapper {
         return employeeDTO;
     }
 
-    public Employee toEntity(EmployeeDTO employeeDTO, Position position, Department department){
+    public List<EmployeeDTO> toDTOList(List<Employee> employees){
+        if (employees == null){
+            return null;
+        }
+        return employees.stream()
+                .map(this::toDTO).collect(Collectors.toList());
+    }
+
+    public Employee toEntity(EmployeeDTO employeeDTO){
         if (employeeDTO == null) {
             return null;
         }
@@ -34,8 +44,6 @@ public class EmployeeMapper {
         employee.setName(employeeDTO.getName());
         employee.setEmail(employeeDTO.getEmail());
         employee.setSalary(employeeDTO.getSalary());
-        employee.setPosition(position);
-        employee.setDepartment(department);
         return employee;
     }
 }

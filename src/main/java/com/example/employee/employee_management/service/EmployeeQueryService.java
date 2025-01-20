@@ -1,9 +1,11 @@
 package com.example.employee.employee_management.service;
+import com.example.employee.employee_management.dto.EmployeeDTO;
 import com.example.employee.employee_management.exception.EntityNotFoundException;
 import com.example.employee.employee_management.model.Employee;
 import com.example.employee.employee_management.repository.DepartmentRepository;
 import com.example.employee.employee_management.repository.EmployeeRepository;
 import com.example.employee.employee_management.repository.PositionRepository;
+import mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,27 +17,30 @@ public class EmployeeQueryService {
     EmployeeRepository employeeRepository;
     DepartmentRepository departmentRepository;
     PositionRepository positionRepository;
+    EmployeeMapper employeeMapper;
 
     public EmployeeQueryService(EmployeeRepository employeeRepository
             , DepartmentRepository departmentRepository
-            , PositionRepository positionRepository) {
+            , PositionRepository positionRepository
+            , EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
         this.departmentRepository = departmentRepository;
         this.positionRepository = positionRepository;
+        this.employeeMapper = employeeMapper;
     }
 
-    public Employee findEmployeeById(Long id){
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee", id));
+    public EmployeeDTO findEmployeeById(Long id){
+        return employeeMapper.toDTO(employeeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Employee", id)));
     }
 
-    public List<Employee> findAllEmployees(){
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> findAllEmployees(){
+        return employeeMapper.toDTOList(employeeRepository.findAll());
     }
 
     @Transactional(readOnly=true)
-    public Employee findEmployeeByIdWithDepartmentAndPosition(Long id){
-        return employeeRepository.findEmployeeByIdWithDepartmentAndPosition(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee", id));
+    public EmployeeDTO findEmployeeByIdWithDepartmentAndPosition(Long id){
+        return employeeMapper.toDTO(employeeRepository.findEmployeeByIdWithDepartmentAndPosition(id)
+                .orElseThrow(() -> new EntityNotFoundException("Employee", id)));
     }
 }

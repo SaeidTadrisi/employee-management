@@ -3,6 +3,7 @@ package com.example.employee.employee_management.service;
 import com.example.employee.employee_management.exception.EntityNotFoundException;
 import com.example.employee.employee_management.model.Position;
 import com.example.employee.employee_management.repository.PositionRepository;
+import mapper.PositionMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +13,11 @@ import java.util.List;
 public class PositionQueryService {
 
     PositionRepository positionRepository;
+    PositionMapper positionMapper;
 
-    public PositionQueryService(PositionRepository positionRepository) {
+    public PositionQueryService(PositionRepository positionRepository, PositionMapper positionMapper) {
         this.positionRepository = positionRepository;
+        this.positionMapper = positionMapper;
     }
 
     public Position findPositionById(Long id){

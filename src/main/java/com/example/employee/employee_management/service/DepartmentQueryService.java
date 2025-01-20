@@ -1,8 +1,10 @@
 package com.example.employee.employee_management.service;
 
+import com.example.employee.employee_management.dto.DepartmentDTO;
 import com.example.employee.employee_management.exception.EntityNotFoundException;
 import com.example.employee.employee_management.model.Department;
 import com.example.employee.employee_management.repository.DepartmentRepository;
+import mapper.DepartmentMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -11,23 +13,25 @@ import java.util.List;
 public class DepartmentQueryService {
 
     DepartmentRepository departmentRepository;
+    DepartmentMapper departmentMapper;
 
-    public DepartmentQueryService(DepartmentRepository departmentRepository) {
+    public DepartmentQueryService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
         this.departmentRepository = departmentRepository;
+        this.departmentMapper = departmentMapper;
     }
 
-    public Department findDepartmentById(Long id){
-        return departmentRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Department", id));
+    public DepartmentDTO findDepartmentById(Long id){
+        return departmentMapper.toDTO(departmentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Department", id)));
     }
 
-    public List<Department> findAllDepartments(){
-        return departmentRepository.findAll();
+    public List<DepartmentDTO> findAllDepartments(){
+        return departmentMapper.toDTOList(departmentRepository.findAll());
     }
 
     @Transactional(readOnly = true)
-    public Department findDepartmentByIdWithEmployees(Long id){
-        return departmentRepository.findDepartmentByIdWithEmployees(id)
-                .orElseThrow(() -> new EntityNotFoundException("Department", id));
+    public DepartmentDTO findDepartmentByIdWithEmployees(Long id){
+        return departmentMapper.toDTO(departmentRepository.findDepartmentByIdWithEmployees(id)
+                .orElseThrow(() -> new EntityNotFoundException("Department", id)));
     }
 }

@@ -4,6 +4,9 @@ import com.example.employee.employee_management.dto.PositionDTO;
 import com.example.employee.employee_management.model.Position;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class PositionMapper {
 
@@ -18,11 +21,18 @@ public class PositionMapper {
         return positionDTO;
     }
 
+    public List<PositionDTO> toDTOList(List<Position> positions){
+        if (positions == null){
+            return null;
+        }
+        return positions.stream()
+                .map(this::toDTO).collect(Collectors.toList());
+    }
+
     public Position toEntity(PositionDTO positionDTO){
         if (positionDTO == null){
             return null;
         }
-
         Position position = new Position();
         position.setTitle(positionDTO.getTitle());
         position.setResponsibilities(positionDTO.getResponsibilities());

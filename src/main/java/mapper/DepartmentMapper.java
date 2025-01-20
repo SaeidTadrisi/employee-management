@@ -4,6 +4,9 @@ import com.example.employee.employee_management.dto.DepartmentDTO;
 import com.example.employee.employee_management.model.Department;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class DepartmentMapper {
 
@@ -15,6 +18,14 @@ public class DepartmentMapper {
         departmentDTO.setId(department.getId());
         departmentDTO.setName(departmentDTO.getName());
         return departmentDTO;
+    }
+
+    public List<DepartmentDTO> toDTOList(List<Department> departments){
+        if (departments == null){
+            return null;
+        }
+        return departments.stream()
+                .map(this::toDTO).collect(Collectors.toList());
     }
 
     public Department toEntity(DepartmentDTO departmentDTO){

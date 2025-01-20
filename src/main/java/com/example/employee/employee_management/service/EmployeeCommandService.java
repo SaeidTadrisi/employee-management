@@ -1,5 +1,6 @@
 package com.example.employee.employee_management.service;
 
+import com.example.employee.employee_management.dto.EmployeeDTO;
 import com.example.employee.employee_management.exception.DuplicateEntityException;
 import com.example.employee.employee_management.exception.EntityNotFoundException;
 import com.example.employee.employee_management.model.Department;
@@ -9,6 +10,7 @@ import com.example.employee.employee_management.repository.DepartmentRepository;
 import com.example.employee.employee_management.repository.EmployeeRepository;
 import com.example.employee.employee_management.repository.PositionRepository;
 import jakarta.transaction.Transactional;
+import mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,47 +20,56 @@ public class EmployeeCommandService {
     EmployeeRepository employeeRepository;
     DepartmentRepository departmentRepository;
     PositionRepository positionRepository;
+    EmployeeMapper employeeMapper;
 
     public EmployeeCommandService(EmployeeRepository employeeRepository
             , DepartmentRepository departmentRepository
-            , PositionRepository positionRepository) {
+            , PositionRepository positionRepository
+            , EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
         this.departmentRepository = departmentRepository;
         this.positionRepository = positionRepository;
+        this.employeeMapper = employeeMapper;
     }
 
-    public Employee createEmployee(Employee employee){
-        if (employeeRepository.existsByEmail(employee.getEmail())){
-            throw new DuplicateEntityException("Employee with Email '" + employee.getEmail() + "' already exists");
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO){
+
+        Employee employeeMapperEntity = employeeMapper.toEntity(employeeDTO);
+        if (employeeRepository.existsByEmail(employeeMapperEntity.getEmail())){
+            throw new DuplicateEntityException("Employee with Email '" + employeeMapperEntity.getEmail() + "' already exists");
         }
-        return employeeRepository.save(employee);
+
+        return employeeMapper.toDTO(employeeRepository.save(employeeMapperEntity));
     }
 
-    public Employee updateEmployee(Long id, Employee updatedEmployee){
-        return employeeRepository.findById(id)
+    public EmployeeDTO updateEmployee(Long id, EmployeeDTO updatedEmployeeDTO){
+        Employee employeeMapperEntity = employeeMapper.toEntity(updatedEmployeeDTO);
+
+        Employee savedEmployee = employeeRepository.findById(id)
                 .map(employee -> {
-                    employee.setName(updatedEmployee.getName());
-                    employee.setDepartment(updatedEmployee.getDepartment());
-                    employee.setPosition(updatedEmployee.getPosition());
-                    employee.setSalary(updatedEmployee.getSalary());
+                    employee.setName(employeeMapperEntity.getName());
+                    employee.setDepartment(employeeMapperEntity.getDepartment());
+                    employee.setPosition(employeeMapperEntity.getPosition());
+                    employee.setSalary(employeeMapperEntity.getSalary());
                     return employeeRepository.save(employee);
                 }).orElseThrow(() -> new EntityNotFoundException("Employee", id));
+
+        return employeeMapper.toDTO(savedEmployee);
     }
 
-    public Employee assignDepartment(Long employeeId, Long departmentId){
+    public EmployeeDTO assignDepartment(Long employeeId, Long departmentId){
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new EntityNotFoundException("Employee", employeeId));
-
 
         Department department = departmentRepository.findById(departmentId)
                 .orElseThrow(() -> new EntityNotFoundException("Department", departmentId));
 
         employee.setDepartment(department);
 
-        return employeeRepository.save(employee);
+        return employeeMapper.toDTO(employeeRepository.save(employee));
     }
 
-    public Employee assignPosition(Long employeeId, Long positionId){
+    public EmployeeDTO assignPosition(Long employeeId, Long positionId){
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new EntityNotFoundException("Employee", employeeId));
 
@@ -67,7 +78,7 @@ public class EmployeeCommandService {
 
         employee.setPosition(position);
 
-        return employeeRepository.save(employee);
+        return employeeMapper.toDTO(employeeRepository.save(employee));
     }
 
     public void deleteEmployeeById(Long id){
