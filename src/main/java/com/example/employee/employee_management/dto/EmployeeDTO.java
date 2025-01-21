@@ -22,12 +22,6 @@ public class EmployeeDTO {
     @Min(value = 0, message = "Salary must be a positive value")
     private Double salary;
 
-    @NotNull(message = "Position ID is required")
-    private Long PositionId;
-
-    @NotNull(message = "Position ID is required")
-    private Long DepartmentId;
-
     private String positionTitle;
 
     private String departmentName;
@@ -65,22 +59,6 @@ public class EmployeeDTO {
 
     public void setSalary(Double salary) {
         this.salary = salary;
-    }
-
-    public Long getPositionId() {
-        return PositionId;
-    }
-
-    public void setPositionId(Long positionId) {
-        PositionId = positionId;
-    }
-
-    public Long getDepartmentId() {
-        return DepartmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        DepartmentId = departmentId;
     }
 
     public String getPositionTitle() {

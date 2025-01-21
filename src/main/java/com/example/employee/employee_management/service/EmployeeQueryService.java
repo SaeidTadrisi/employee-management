@@ -6,7 +6,6 @@ import com.example.employee.employee_management.repository.EmployeeRepository;
 import com.example.employee.employee_management.repository.PositionRepository;
 import com.example.employee.employee_management.mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,11 +34,5 @@ public class EmployeeQueryService {
 
     public List<EmployeeDTO> findAllEmployees(){
         return employeeMapper.toDTOList(employeeRepository.findAll());
-    }
-
-    @Transactional(readOnly=true)
-    public EmployeeDTO findEmployeeByIdWithDepartmentAndPosition(Long id){
-        return employeeMapper.toDTO(employeeRepository.findEmployeeByIdWithDepartmentAndPosition(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee", id)));
     }
 }

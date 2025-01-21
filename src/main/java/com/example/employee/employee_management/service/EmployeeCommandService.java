@@ -48,6 +48,7 @@ public class EmployeeCommandService {
         Employee savedEmployee = employeeRepository.findById(id)
                 .map(employee -> {
                     employee.setName(employeeMapperEntity.getName());
+                    employee.setEmail(employeeMapperEntity.getEmail());
                     employee.setDepartment(employeeMapperEntity.getDepartment());
                     employee.setPosition(employeeMapperEntity.getPosition());
                     employee.setSalary(employeeMapperEntity.getSalary());

@@ -19,9 +19,7 @@ public class EmployeeMapper {
         employeeDTO.setName(employee.getName());
         employeeDTO.setEmail(employee.getEmail());
         employeeDTO.setSalary(employee.getSalary());
-        employeeDTO.setPositionId(employee.getPosition() != null ? employee.getPosition().getId() : null);
         employeeDTO.setPositionTitle(employee.getPosition() != null ? employee.getPosition().getTitle() : null);
-        employeeDTO.setDepartmentId(employee.getDepartment() != null ? employee.getDepartment().getId() : null);
         employeeDTO.setDepartmentName(employee.getDepartment() != null ? employee.getDepartment().getName() : null);
         return employeeDTO;
     }
