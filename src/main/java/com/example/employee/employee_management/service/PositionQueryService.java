@@ -3,7 +3,7 @@ package com.example.employee.employee_management.service;
 import com.example.employee.employee_management.exception.EntityNotFoundException;
 import com.example.employee.employee_management.model.Position;
 import com.example.employee.employee_management.repository.PositionRepository;
-import mapper.PositionMapper;
+import com.example.employee.employee_management.mapper.PositionMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

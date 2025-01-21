@@ -15,6 +15,7 @@ CREATE TABLE employee_management.positions (
 CREATE TABLE employee_management.employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
+	email VARCHAR(255) NOT NULL UNIQUE,
     position_id INT,
     department_id INT,
     salary DECIMAL(10, 2),

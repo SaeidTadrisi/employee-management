@@ -1,11 +1,10 @@
 package com.example.employee.employee_management.service;
 import com.example.employee.employee_management.dto.EmployeeDTO;
 import com.example.employee.employee_management.exception.EntityNotFoundException;
-import com.example.employee.employee_management.model.Employee;
 import com.example.employee.employee_management.repository.DepartmentRepository;
 import com.example.employee.employee_management.repository.EmployeeRepository;
 import com.example.employee.employee_management.repository.PositionRepository;
-import mapper.EmployeeMapper;
+import com.example.employee.employee_management.mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package mapper;
+package com.example.employee.employee_management.mapper;
 
 import com.example.employee.employee_management.dto.DepartmentDTO;
 import com.example.employee.employee_management.model.Department;

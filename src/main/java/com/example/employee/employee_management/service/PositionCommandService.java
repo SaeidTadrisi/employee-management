@@ -7,7 +7,7 @@ import com.example.employee.employee_management.exception.EntityNotFoundExceptio
 import com.example.employee.employee_management.model.Position;
 import com.example.employee.employee_management.repository.PositionRepository;
 import jakarta.transaction.Transactional;
-import mapper.PositionMapper;
+import com.example.employee.employee_management.mapper.PositionMapper;
 import org.springframework.stereotype.Service;
 
 @Service

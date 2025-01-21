@@ -10,7 +10,7 @@ import com.example.employee.employee_management.repository.DepartmentRepository;
 import com.example.employee.employee_management.repository.EmployeeRepository;
 import com.example.employee.employee_management.repository.PositionRepository;
 import jakarta.transaction.Transactional;
-import mapper.EmployeeMapper;
+import com.example.employee.employee_management.mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;
 
 @Service
