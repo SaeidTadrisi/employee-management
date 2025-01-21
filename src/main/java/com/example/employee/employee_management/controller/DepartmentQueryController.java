@@ -22,7 +22,7 @@ public class DepartmentQueryController {
         return ResponseEntity.ok(queryService.findDepartmentById(id));
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<DepartmentDTO>> getAllDepartments(){
         return ResponseEntity.ok(queryService.findAllDepartments());
     }

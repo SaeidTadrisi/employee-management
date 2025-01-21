@@ -25,7 +25,7 @@ public class EmployeeQueryController {
         return ResponseEntity.ok(queryService.findEmployeeById(id));
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees(){
         return ResponseEntity.ok(queryService.findAllEmployees());
     }

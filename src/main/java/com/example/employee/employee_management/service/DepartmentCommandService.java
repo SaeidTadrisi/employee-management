@@ -34,11 +34,11 @@ public class DepartmentCommandService {
 
     public DepartmentDTO updateDepartment(Long id, DepartmentDTO updatedDepartmentDTO){
 
-        Department departmentMapperEntity = departmentMapper.toEntity(updatedDepartmentDTO);
+        Department departmentEntity = departmentMapper.toEntity(updatedDepartmentDTO);
 
         Department savedDepartment = departmentRepository.findById(id)
                 .map(department -> {
-                    department.setName(departmentMapperEntity.getName());
+                    department.setName(departmentEntity.getName());
                     return departmentRepository.save(department);
                 }).orElseThrow(() -> new EntityNotFoundException("Department", id));
 

@@ -43,15 +43,15 @@ public class EmployeeCommandService {
     }
 
     public EmployeeDTO updateEmployee(Long id, EmployeeDTO updatedEmployeeDTO){
-        Employee employeeMapperEntity = employeeMapper.toEntity(updatedEmployeeDTO);
+        Employee employeeEntity = employeeMapper.toEntity(updatedEmployeeDTO);
 
         Employee savedEmployee = employeeRepository.findById(id)
                 .map(employee -> {
-                    employee.setName(employeeMapperEntity.getName());
-                    employee.setEmail(employeeMapperEntity.getEmail());
-                    employee.setDepartment(employeeMapperEntity.getDepartment());
-                    employee.setPosition(employeeMapperEntity.getPosition());
-                    employee.setSalary(employeeMapperEntity.getSalary());
+                    employee.setName(employeeEntity.getName());
+                    employee.setEmail(employeeEntity.getEmail());
+                    employee.setDepartment(employeeEntity.getDepartment());
+                    employee.setPosition(employeeEntity.getPosition());
+                    employee.setSalary(employeeEntity.getSalary());
                     return employeeRepository.save(employee);
                 }).orElseThrow(() -> new EntityNotFoundException("Employee", id));
 

@@ -24,12 +24,12 @@ public class PositionCommandService {
 
     public PositionDTO createPosition(PositionDTO positionDTO){
 
-        Position positionMapperEntity = positionMapper.toEntity(positionDTO);
+        Position positionEntity = positionMapper.toEntity(positionDTO);
 
-        if (positionRepository.existsByTitle(positionMapperEntity.getTitle())){
+        if (positionRepository.existsByTitle(positionEntity.getTitle())){
             throw new DuplicateEntityException("Position with name '" + positionDTO.getTitle() + "' already exists");
         }
-        return positionMapper.toDTO(positionRepository.save(positionMapperEntity));
+        return positionMapper.toDTO(positionRepository.save(positionEntity));
     }
 
     public PositionDTO updatePosition(Long id, PositionDTO updatedPositionDTO){

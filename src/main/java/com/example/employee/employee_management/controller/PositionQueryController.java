@@ -22,7 +22,7 @@ public class PositionQueryController {
         return ResponseEntity.ok(queryService.findPositionById(id));
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<PositionDTO>> getAllPositions(){
         return ResponseEntity.ok(queryService.findAllPositions());
     }
