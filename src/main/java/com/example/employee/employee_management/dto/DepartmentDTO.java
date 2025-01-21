@@ -8,7 +8,7 @@ public class DepartmentDTO {
     private Long id;
 
     @NotNull(message = "Department Name is required")
-    @Size(min = 3, max = 100, message = "Department name must be between 3 and 100 characters")
+    @Size(min = 2, max = 100, message = "Department name must be between 2 and 100 characters")
     private String name;
 
     public DepartmentDTO() {
@@ -28,5 +28,13 @@ public class DepartmentDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "DepartmentDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

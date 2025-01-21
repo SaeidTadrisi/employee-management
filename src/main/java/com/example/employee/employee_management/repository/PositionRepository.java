@@ -14,5 +14,5 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
     @Query("SELECT p FROM Position p JOIN FETCH p.employees WHERE p.id = :id")
     Optional<Position> findPositionByIdWithEmployees(@Param("id") Long id);
 
-    boolean existsByName(String name);
+    boolean existsByTitle(String title);
 }

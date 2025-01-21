@@ -1,5 +1,8 @@
 package com.example.employee.employee_management;
 
+import com.example.employee.employee_management.service.DepartmentQueryService;
+import com.example.employee.employee_management.service.EmployeeCommandService;
+import com.example.employee.employee_management.service.EmployeeQueryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,13 +16,14 @@ public class EmployeeManagementSystemApplication {
 	}
 
 	@Bean
-	public CommandLineRunner cm (){
+	public CommandLineRunner cm (DepartmentQueryService departmentQueryService){
 
 		return runner -> {
 
 //			createEmployee(employeeService);
 //			createDepartment(departmentService);
 //			createPosition(positionService);
+//			System.out.println(departmentQueryService.findDepartmentById(1L));
 
 //			employeeService.assignDepartment(1L,1L);
 //			employeeService.assignPosition(1L,1L);

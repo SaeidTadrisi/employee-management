@@ -26,7 +26,7 @@ public class PositionCommandService {
 
         Position positionMapperEntity = positionMapper.toEntity(positionDTO);
 
-        if (positionRepository.existsByName(positionMapperEntity.getTitle())){
+        if (positionRepository.existsByTitle(positionMapperEntity.getTitle())){
             throw new DuplicateEntityException("Position with name '" + positionDTO.getTitle() + "' already exists");
         }
         return positionMapper.toDTO(positionRepository.save(positionMapperEntity));

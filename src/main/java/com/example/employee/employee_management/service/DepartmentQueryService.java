@@ -22,6 +22,8 @@ public class DepartmentQueryService {
     public DepartmentDTO findDepartmentById(Long id){
         return departmentMapper.toDTO(departmentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Department", id)));
+
+
     }
 
     public List<DepartmentDTO> findAllDepartments(){

@@ -1,9 +1,7 @@
 package com.example.employee.employee_management.mapper;
 
 import com.example.employee.employee_management.dto.EmployeeDTO;
-import com.example.employee.employee_management.model.Department;
 import com.example.employee.employee_management.model.Employee;
-import com.example.employee.employee_management.model.Position;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,8 +17,8 @@ public class EmployeeMapper {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setId(employee.getId());
         employeeDTO.setName(employee.getName());
-        employeeDTO.setSalary(employee.getSalary());
         employeeDTO.setEmail(employee.getEmail());
+        employeeDTO.setSalary(employee.getSalary());
         employeeDTO.setPositionId(employee.getPosition() != null ? employee.getPosition().getId() : null);
         employeeDTO.setPositionTitle(employee.getPosition() != null ? employee.getPosition().getTitle() : null);
         employeeDTO.setDepartmentId(employee.getDepartment() != null ? employee.getDepartment().getId() : null);
