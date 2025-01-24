@@ -1,8 +1,6 @@
 package com.example.employee.employee_management;
 
-import com.example.employee.employee_management.service.DepartmentQueryService;
-import com.example.employee.employee_management.service.EmployeeCommandService;
-import com.example.employee.employee_management.service.EmployeeQueryService;
+import com.example.employee.employee_management.service.query.DepartmentQueryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

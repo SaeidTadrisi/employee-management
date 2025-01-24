@@ -1,7 +1,7 @@
 package com.example.employee.employee_management.controller;
 
 import com.example.employee.employee_management.dto.PositionDTO;
-import com.example.employee.employee_management.service.PositionQueryService;
+import com.example.employee.employee_management.service.query.PositionQueryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

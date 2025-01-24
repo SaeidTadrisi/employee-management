@@ -1,7 +1,7 @@
 package com.example.employee.employee_management.controller;
 
 import com.example.employee.employee_management.dto.EmployeeDTO;
-import com.example.employee.employee_management.service.EmployeeQueryService;
+import com.example.employee.employee_management.service.query.EmployeeQueryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

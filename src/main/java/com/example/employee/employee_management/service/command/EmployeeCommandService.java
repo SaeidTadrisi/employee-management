@@ -1,4 +1,4 @@
-package com.example.employee.employee_management.service;
+package com.example.employee.employee_management.service.command;
 
 import com.example.employee.employee_management.dto.EmployeeDTO;
 import com.example.employee.employee_management.exception.DuplicateEntityException;

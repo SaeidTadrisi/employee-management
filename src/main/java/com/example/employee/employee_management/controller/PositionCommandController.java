@@ -1,7 +1,7 @@
 package com.example.employee.employee_management.controller;
 
 import com.example.employee.employee_management.dto.PositionDTO;
-import com.example.employee.employee_management.service.PositionCommandService;
+import com.example.employee.employee_management.service.command.PositionCommandService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.example.employee.employee_management.controller;
 
 import com.example.employee.employee_management.dto.DepartmentDTO;
-import com.example.employee.employee_management.service.DepartmentQueryService;
+import com.example.employee.employee_management.service.query.DepartmentQueryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

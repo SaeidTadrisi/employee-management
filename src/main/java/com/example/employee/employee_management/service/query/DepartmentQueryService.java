@@ -1,4 +1,4 @@
-package com.example.employee.employee_management.service;
+package com.example.employee.employee_management.service.query;
 
 import com.example.employee.employee_management.dto.DepartmentDTO;
 import com.example.employee.employee_management.exception.EntityNotFoundException;
