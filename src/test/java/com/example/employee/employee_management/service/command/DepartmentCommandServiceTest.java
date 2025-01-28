@@ -118,5 +118,4 @@ class DepartmentCommandServiceTest {
         assertThrows(EntityNotFoundException.class, () -> departmentCommandService.deleteDepartmentById(departmentId));
         verify(departmentRepository, never()).deleteById(departmentId);
     }
-
 }
