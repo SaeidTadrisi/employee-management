@@ -4,6 +4,7 @@ import com.example.employee.employee_management.dto.DepartmentDTO;
 import com.example.employee.employee_management.model.Department;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class DepartmentMapper {
 
     public List<DepartmentDTO> toDTOList(List<Department> departments){
         if (departments == null){
-            return null;
+            return Collections.emptyList();
         }
         return departments.stream()
                 .map(this::toDTO).collect(Collectors.toList());
