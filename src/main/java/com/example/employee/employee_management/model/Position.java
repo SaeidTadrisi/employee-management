@@ -1,7 +1,6 @@
 package com.example.employee.employee_management.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -12,15 +11,16 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String title;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false)
     private String responsibilities;
 
     @OneToMany(mappedBy = "position",
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Employee> employees;
+
 
     public Position() {
     }
@@ -61,7 +61,6 @@ public class Position {
     public void setTitle(String title) {
         this.title = title;
     }
-
 
     @Override
     public String toString() {
