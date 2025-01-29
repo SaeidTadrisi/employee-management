@@ -13,10 +13,10 @@ public class EmployeeManagementSystemApplication {
 		SpringApplication.run(EmployeeManagementSystemApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner cm (DepartmentQueryService departmentQueryService){
-
-		return runner -> {
+//	@Bean
+//	public CommandLineRunner cm (DepartmentQueryService departmentQueryService){
+//
+//		return runner -> {
 
 //			createEmployee(employeeService);
 //			createDepartment(departmentService);
@@ -56,8 +56,8 @@ public class EmployeeManagementSystemApplication {
 //			System.out.println(employeeService.findEmployeeByIdWithDepartmentAndPosition(3L));
 
 
-		};
-}
+//		};
+//}
 
 //	private Position createPosition(PositionService positionService) {
 //		return positionService.createPosition(new Position("Software Developer"

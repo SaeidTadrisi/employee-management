@@ -1,4 +1,4 @@
-package com.example.employee.employee_management.controller;
+package com.example.employee.employee_management.controller.command;
 
 import com.example.employee.employee_management.dto.DepartmentDTO;
 import com.example.employee.employee_management.service.command.DepartmentCommandService;
