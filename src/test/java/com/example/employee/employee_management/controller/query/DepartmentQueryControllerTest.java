@@ -1,6 +1,5 @@
-package com.example.employee.employee_management.controller;
+package com.example.employee.employee_management.controller.query;
 
-import com.example.employee.employee_management.controller.query.DepartmentQueryController;
 import com.example.employee.employee_management.dto.DepartmentDTO;
 import com.example.employee.employee_management.service.query.DepartmentQueryService;
 import org.junit.jupiter.api.BeforeEach;
